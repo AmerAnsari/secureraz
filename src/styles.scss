@@ -1,6 +1,10 @@
 /* Variable */
 
-@import "variables";
+@import "src/variables";
+
+/* Font */
+
+@import url("https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;600&display=swap");
 
 /* Bootstrap */
 
@@ -57,5 +61,6 @@
 // Utilities
 @import "~bootstrap/scss/utilities/api";
 
-// Bootstrap icons
+/* Bootstrap Icons */
+
 @import "~bootstrap-icons/font/bootstrap-icons.css";
