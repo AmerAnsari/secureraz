@@ -1,0 +1,20 @@
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Site</th>
+      <th>Category</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let account of accounts">
+      <td>{{ account.username }}</td>
+      <td>{{ account.password }}</td>
+      <td>{{ account.site }}</td>
+      <td>{{ account.category.name }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

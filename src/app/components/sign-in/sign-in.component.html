@@ -1,0 +1,23 @@
+<div class="container py-5">
+  <div class="d-flex justify-content-center">
+    <form class="card" [formGroup]="form.form" (ngSubmit)="signIn()">
+      <div class="card-header">Sign in</div>
+      <div class="card-body">
+        <!-- Username -->
+        <div class="mb-3">
+          <label class="form-label" for="username">Username</label>
+          <input class="form-control" type="text" id="username" formControlName="username">
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label class="form-label" for="password">Password</label>
+          <input class="form-control" type="password" id="password" formControlName="password">
+        </div>
+
+        <!-- Sign in -->
+        <button class="btn btn-primary d-block w-100" type="submit">Sign in</button>
+      </div>
+    </form>
+  </div>
+</div>
