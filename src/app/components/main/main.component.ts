@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Link } from './shared/interfaces/link';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  styleUrls: ['./main.component.scss'],
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  readonly links: Link[] = [
+    { label: 'Accounts', path: './accounts', icon: 'bi-shield-lock' },
+    { label: 'Files', path: './files', icon: 'bi-files-alt' },
+  ];
 }

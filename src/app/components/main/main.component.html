@@ -1,16 +1,15 @@
-<div class="py-3 bg-light container-fluid d-flex">
-  <!-- Brand -->
-  <div>Secureraz</div>
-
-  <div class="d-flex w-100 justify-content-center">
-    <a class="me-4" routerLink="./accounts">
-      <i class="bi-shield-lock"></i>
-      <span>Accounts</span>
-    </a>
-    <a routerLink="./files">
-      <i class="bi-files-alt"></i>
-      <span>Files</span>
-    </a>
+<!-- Navigation -->
+<div class="bg-white py-3">
+  <div class="container d-flex align-items-center justify-content-center">
+    <div class="links">
+      <a class="link"
+         routerLinkActive="active"
+         [routerLink]="link.path"
+         *ngFor="let link of links">
+        <i [classList]="link.icon"></i>
+        <div>{{ link.label }}</div>
+      </a>
+    </div>
   </div>
 </div>
 

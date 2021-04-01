@@ -1,0 +1,41 @@
+@import "src/variables";
+
+.links {
+  display: flex;
+  align-items: center;
+
+  > .link {
+    width: 100px;
+    text-align: center;
+    display: block;
+    padding: map_get($spacers, 3);
+    margin: 0 map_get($spacers, 2);
+    color: $text-muted;
+    border-radius: $border-radius-lg;
+    transition: $transition-base;
+
+    &:hover,
+    &:focus {
+      background: $light;
+    }
+
+    &:active {
+      position: relative;
+      top: 2px;
+    }
+
+    &.active {
+      background: rgba($primary, 0.1);
+      color: $primary;
+      pointer-events: none;
+    }
+
+    > div {
+      font-size: $font-size-sm;
+    }
+
+    > i {
+      font-size: $font-size-lg * 1.5;
+    }
+  }
+}
