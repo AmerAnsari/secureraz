@@ -1,0 +1,21 @@
+@import "src/variables";
+
+$height: 300px;
+
+.wrapper {
+  background: $white;
+  border-top: 1px solid $border-color;
+  box-shadow: $box-shadow-lg;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  max-height: $height;
+  overflow-y: auto;
+  transition: $transition-base;
+
+  &.close {
+    bottom: -$height;
+    pointer-events: none;
+  }
+}

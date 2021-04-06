@@ -1,0 +1,5 @@
+<div class="wrapper" [class.close]="!show">
+  <div class="container" *ngIf="show">
+    <ng-template [ngTemplateOutlet]="template"></ng-template>
+  </div>
+</div>
