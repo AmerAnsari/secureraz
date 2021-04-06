@@ -1,20 +1,42 @@
 <div class="container">
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>Username</th>
-      <th>Password</th>
-      <th>Site</th>
-      <th>Category</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let account of accounts">
-      <td>{{ account.username }}</td>
-      <td>{{ account.password }}</td>
-      <td>{{ account.site }}</td>
-      <td>{{ account.category.name }}</td>
-    </tr>
-    </tbody>
-  </table>
+
+  <input type="text" class="mx-auto my-4 form-control p-3" placeholder="Search">
+
+  <div class="row">
+    <div class="col-md-6" *ngFor="let account of accounts">
+      <div class="card mb-3">
+        <div class="card-body">
+          <a class="font-weight-bold font-monospace" (click)="accountSelected = account">{{ account.site }}</a>
+          <div class="d-flex small text-muted">
+            <span class="me-auto mt-auto">{{ account.username }}</span>
+            <a class="category px-3 border rounded-pill pt-1">
+              <i class="bi-folder me-1"></i>
+              <span>{{ account.category.name }}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<app-dialog [template]="template" [show]="accountSelected !== null">
+  <ng-template #template>
+    <div class="container text-center py-4" *ngIf="accountSelected">
+      <h1 class="font-monospace">{{ accountSelected.site }}</h1>
+      <div class="d-flex my-4">
+        <div class="w-100">
+          <p class="font-weight-bold">Username</p>
+          <span class="py-1 px-4 border border-muted rounded-pill">{{ accountSelected.username }}</span>
+        </div>
+        <div class="w-100">
+          <p class="font-weight-bold">Category</p>
+          <span class="py-1 px-4 border border-muted rounded-pill">{{ accountSelected.category.name }}</span>
+        </div>
+      </div>
+      <button class="w-100 font-monospace btn btn-lg btn-dark rounded-pill">
+        {{ accountSelected.password }}
+      </button>
+    </div>
+  </ng-template>
+</app-dialog>

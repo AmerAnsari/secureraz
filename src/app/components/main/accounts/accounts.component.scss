@@ -1,0 +1,20 @@
+@import "src/variables";
+
+input {
+  max-width: map_get($grid-breakpoints, md);
+}
+
+a {
+  cursor: pointer;
+}
+
+.category {
+  color: $text-muted;
+
+  &:hover,
+  &:focus {
+    background: $primary;
+    border-color: $primary;
+    color: $white;
+  }
+}
