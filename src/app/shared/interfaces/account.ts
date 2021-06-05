@@ -1,4 +1,4 @@
-import { Category } from 'src/app/shared/interfaces/category';
+import { Category } from './category';
 
 export interface Account {
   id: number;

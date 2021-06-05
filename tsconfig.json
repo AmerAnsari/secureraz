@@ -15,9 +15,37 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@environments/*": [
+        "src/environments/*"
+      ],
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@models/*": [
+        "src/app/models/*"
+      ],
+      "@classes/*": [
+        "src/app/shared/classes/*"
+      ],
+      "@interfaces/*": [
+        "src/app/shared/interfaces/*"
+      ],
+      "@modules/*": [
+        "src/app/shared/modules/*"
+      ],
+      "@types/*": [
+        "src/app/shared/types/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
     "enableI18nLegacyMessageIdFormat": false
   }
 }

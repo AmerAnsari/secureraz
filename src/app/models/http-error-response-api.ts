@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { ApiError } from 'src/app/shared/interfaces/api-error';
+import { ApiError } from '@interfaces/api-error';
 
 export class HttpErrorResponseApi extends HttpErrorResponse {
   readonly error: ApiError;

@@ -2,9 +2,9 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { Injectable, Injector } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AuthService } from 'src/app/core/auth/auth.service';
-import { HttpErrorResponseApi } from 'src/app/models/http-error-response-api';
-import { environment } from 'src/environments/environment';
+import { AuthService } from '@core/auth/auth.service';
+import { HttpErrorResponseApi } from '@models/http-error-response-api';
+import { environment } from '@environments/environment';
 
 @Injectable({
   providedIn: 'root'

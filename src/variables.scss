@@ -6,6 +6,11 @@ $secondary: #485460;
 $body-bg: #F6F7FB;
 $body-color: #303952;
 $light: #e9ecef;
+$tertiary: lighten($secondary, 35);
+
+$scrollbar-size: 4px;
+
+$modal-fade-transform: skew(30deg, 20deg);
 
 $font-family-base: "Hind Madurai", sans-serif;
 $font-weight-normal: 300;

@@ -1,0 +1,22 @@
+<div class="modal-content border-0">
+  <div class="modal-body">
+
+    <!-- Image -->
+    <img [src]="file.file" [alt]="file.name" *ngIf="file.file_type.id === fileType.IMAGE">
+
+    <!-- Video -->
+    <video controls *ngIf="file.file_type.id === fileType.VIDEO">
+      <source [src]="file.file">
+    </video>
+
+    <!-- Audio -->
+    <video controls *ngIf="file.file_type.id === fileType.AUDIO">
+      <source [src]="file.file">
+    </video>
+  </div>
+
+  <!-- Close -->
+  <div class="text-primary close link" (click)="bsModalRef.hide()">
+    <i class="bi-x-circle"></i>
+  </div>
+</div>

@@ -4,17 +4,22 @@ input {
   max-width: map_get($grid-breakpoints, md);
 }
 
-a {
-  cursor: pointer;
+.plus-icon {
+  font-size: 20px;
 }
 
 .category {
   color: $text-muted;
 
   &:hover,
+  &.active,
   &:focus {
     background: $primary;
     border-color: $primary;
     color: $white;
   }
+}
+
+.password {
+  word-break: break-word;
 }

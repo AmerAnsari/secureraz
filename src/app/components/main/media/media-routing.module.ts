@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FilesComponent } from './files.component';
+import { MediaComponent } from './media.component';
 
 
 const routes: Routes = [{
   path: '',
-  component: FilesComponent,
+  component: MediaComponent,
 }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class FilesRoutingModule {
+export class MediaRoutingModule {
 }

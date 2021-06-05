@@ -1,0 +1,101 @@
+<div (click)="isDialog = false">
+  <div class="container">
+
+    <div class="input-group my-4">
+      <!-- Search -->
+      <input type="text" class="mx-auto form-control p-3" placeholder="Search" [(ngModel)]="search">
+
+      <!-- Add category -->
+      <button class="btn btn-primary input-group-text" (click)="$event.stopPropagation(); add()">
+        <i class="bi-plus plus-icon"></i>
+      </button>
+    </div>
+
+    <!-- Data -->
+    <div class="row">
+      <div class="col-md-6" *ngFor="let category of categories | filter: search">
+        <div class="card mb-3">
+          <div class="card-body d-flex">
+            <a class="font-weight-bold font-monospace" (click)="$event.stopPropagation(); select(category)">
+              {{ category.name }}
+            </a>
+            <div class="ms-auto font-weight-bold font-monospace">
+
+              <!-- Accounts count -->
+              <a class="d-block d-flex" (click)="goToPage(category, 'accounts')"
+                 [class.pe-none]="!category.accounts_count">
+                <span class="me-4">Accounts</span>
+                <span class="ms-auto" [class.count]="!category.accounts_count">{{ category.accounts_count }}</span>
+                <i class="bi-arrow-right ms-1" *ngIf="category.accounts_count"></i>
+              </a>
+
+              <!-- Files count -->
+              <a class="d-block d-flex" (click)="goToPage(category, 'files')"
+                 [class.pe-none]="!category.files_count">
+                <span class="me-4">Files</span>
+                <span class="ms-auto" [class.count]="!category.files_count">{{ category.files_count }}</span>
+                <i class="bi-arrow-right ms-1" *ngIf="category.files_count"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-dialog [template]="template" [show]="isDialog">
+  <ng-template #template>
+    <div class="container py-4">
+
+      <!-- Header -->
+      <div class="d-flex">
+        <!-- Back -->
+        <ng-container *ngIf="!form.viewMode && form.id">
+          <a class="fw-bold text-primary link"
+             (click)="form.viewMode = !form.viewMode">
+            <i class="bi-arrow-left text-secondary"></i>
+            <span class="ms-2">View {{ form.data.name }}</span>
+          </a>
+
+          <!-- Delete -->
+          <a class="text-secondary ms-auto">
+            <i class="bi-trash"></i>
+          </a>
+        </ng-container>
+
+        <!-- Edit -->
+        <a class="text-primary link ms-auto" *ngIf="form.viewMode" (click)="form.viewMode = !form.viewMode">
+          <i class="bi-pen"></i>
+        </a>
+      </div>
+
+      <!-- View -->
+      <div class="text-center" *ngIf="form.viewMode">
+
+        <!-- Site -->
+        <h1 class="font-monospace text-secondary">{{ form.data.name }}</h1>
+      </div>
+
+      <!-- Form -->
+      <div *ngIf="!form.viewMode" [formGroup]="form.form">
+
+        <!-- Name -->
+        <div class="form-floating">
+          <input id="site" type="text" class="form-control my-2" placeholder="name" formControlName="name">
+          <label for="site">Category</label>
+          <div class="text-danger" *ngIf="form.error.name">{{ form.error.name[0] }}</div>
+        </div>
+
+        <!-- Errors -->
+        <div class="text-danger" *ngIf="form.error.non_field_errors">{{ form.error.non_field_errors[0] }}</div>
+
+        <!-- Submit -->
+        <button class="btn btn-primary w-100" type="submit" (click)="submit()">
+          <span *ngIf="form.id">Update</span>
+          <span *ngIf="!form.id">Create</span>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</app-dialog>
