@@ -1,4 +1,4 @@
-import { User } from 'src/app/shared/interfaces/user';
+import { User } from './user';
 
 /**
  * Authentication response

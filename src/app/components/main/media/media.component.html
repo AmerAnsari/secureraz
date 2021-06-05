@@ -1,0 +1,197 @@
+<div (click)="isDialog = false">
+  <div class="container">
+
+    <div class="input-group my-4">
+
+      <!-- Search -->
+      <input type="text" class="mx-auto form-control p-3" placeholder="Search" [(ngModel)]="search">
+
+      <!-- Add File -->
+      <button class="btn btn-primary input-group-text" (click)="$event.stopPropagation(); add()">
+        <i class="bi-plus plus-icon"></i>
+      </button>
+    </div>
+
+    <!-- Data -->
+    <div class="row files">
+      <div class="col-md-3 col-4" *ngFor="let file of files | filter: search">
+
+        <!-- File -->
+        <div class="file" [style.background-image]="utils.sanitizeBackgroundImage(file.file)"
+             (click)="$event.stopPropagation(); select(file)">
+
+          <!-- Icon -->
+          <div class="type" [class.no-category]="!file.category">
+            <!-- Video -->
+            <i class="bi-camera-video" *ngIf="file.file_type.id === fileType.VIDEO"></i>
+            <!-- Audio -->
+            <i class="bi-volume-up" *ngIf="file.file_type.id === fileType.AUDIO"></i>
+            <!-- Document & compressed -->
+            <i class="bi-file-earmark"
+               *ngIf="file.file_type.id === fileType.DOCUMENT || file.file_type.id === fileType.COMPRESSED"></i>
+          </div>
+
+          <!-- Category -->
+          <div class="category text-truncate" *ngIf="file.category">
+            {{ file.category.name }}
+          </div>
+        </div>
+
+        <!-- Name -->
+        <div class="name text-center text-muted text-truncate">{{ file.name }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-dialog [template]="template" [show]="isDialog">
+  <ng-template #template>
+    <div class="container py-4">
+
+      <!-- View mode -->
+      <div class="view" *ngIf="form.viewMode">
+
+        <!-- File -->
+        <div>
+
+          <!-- Image -->
+          <div class="file" (click)="openFile()" *ngIf="form.data.file_type.id === fileType.IMAGE"
+               [style.background-image]="utils.sanitizeBackgroundImage(form.data.file)"></div>
+
+          <!-- Video -->
+          <video class="file pt-0" (click)="openFile()" *ngIf="form.data.file_type.id === fileType.VIDEO">
+            <source [src]="form.data.file">
+          </video>
+
+          <!-- Audio -->
+          <a class="file-icon" (click)="openFile()" *ngIf="form.data.file_type.id === fileType.AUDIO">
+            <i class="bi-volume-up"></i>
+          </a>
+
+          <!-- Document -->
+          <a class="file-icon" target="_blank" [href]="form.data.file"
+             *ngIf="form.data.file_type.id === fileType.DOCUMENT || form.data.file_type.id === fileType.COMPRESSED">
+            <i class="bi-file-earmark"></i>
+          </a>
+
+          <!-- Others -->
+          <div class="file-icon" *ngIf="form.data.file_type.id === fileType.OTHER">
+            <i class="bi-emoji-frown"></i>
+          </div>
+
+          <!-- File actions -->
+          <div class="file-actions mt-1">
+
+            <!-- Download -->
+            <a class="link" (click)="downloadFile()">
+              <i class="bi-cloud-download"></i>
+            </a>
+
+            <!-- Share -->
+            <a class="link ms-3" (click)="share()">
+              <i class="bi-share"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- info -->
+        <div>
+
+          <!-- Badges -->
+          <div class="badges">
+
+            <!-- Date -->
+            <div class="badge">{{ form.data.updated | date }}</div>
+
+            <!-- Type -->
+            <div class="badge ms-1">{{ form.data.file_type.name | titlecase }}</div>
+
+            <!-- Edit -->
+            <a class="text-primary link ms-auto" *ngIf="form.viewMode" (click)="form.viewMode = !form.viewMode">
+              <i class="bi-pen"></i>
+            </a>
+          </div>
+
+          <!-- Name -->
+          <div>
+            <div class="label">Name</div>
+            <div>{{ form.data.name }}</div>
+          </div>
+
+          <!-- Category -->
+          <div class="mt-3">
+            <div class="label">Category</div>
+            <div *ngIf="form.data.category">{{ form.data.category?.name }}</div>
+            <div class="text-muted small" *ngIf="!form.data.category">No category</div>
+          </div>
+
+          <!-- Description -->
+          <div class="mt-3">
+            <div class="label">Description</div>
+            <div *ngIf="form.data.description">{{ form.data.description }}</div>
+            <div class="text-muted small" *ngIf="!form.data.description">No description</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="form" *ngIf="!form.viewMode" [formGroup]="form.form">
+
+        <!-- File -->
+        <div class="m-auto text-center">
+          <!-- Upload -->
+          <div>
+            <input type="file" class="d-none" #fileElement (change)="onFileUpload($event)">
+            <button class="btn btn-primary" (click)="fileElement.click()">Upload</button>
+          </div>
+        </div>
+
+        <!-- Other inputs -->
+        <div>
+          <div class="row">
+
+            <!-- Name -->
+            <div class="col-md-6">
+              <div class="form-floating">
+                <input id="name" type="text" class="form-control my-2" placeholder="name" formControlName="name">
+                <label for="name">Name</label>
+                <div class="text-danger" *ngIf="form.error.name">{{ form.error.name[0] }}</div>
+              </div>
+            </div>
+
+            <!-- Category -->
+            <div class="col-md-6">
+              <div class="form-floating">
+                <select id="category" class="form-select my-2" formControlName="category">
+                  <option [ngValue]="null">Choose category</option>
+                  <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+                </select>
+                <label for="category">Category</label>
+                <div class="text-danger" *ngIf="form.error.category">{{ form.error.category[0] }}</div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="col-md-12">
+              <div class="form-floating">
+                <input id="description" type="text" class="form-control my-2"
+                       placeholder="description" formControlName="description">
+                <label for="name">description</label>
+                <div class="text-danger" *ngIf="form.error.description">{{ form.error.description[0] }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Errors -->
+          <div class="text-danger" *ngIf="form.error.non_field_errors">{{ form.error.non_field_errors[0] }}</div>
+
+          <!-- Submit -->
+          <button class="btn btn-primary w-100" type="submit" (click)="submit()">
+            <span *ngIf="form.id">Update</span>
+            <span *ngIf="!form.id">Create</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</app-dialog>

@@ -1,18 +1,33 @@
-<div class="container">
+<div (click)="isDialog = false">
+  <div class="container">
 
-  <input type="text" class="mx-auto my-4 form-control p-3" placeholder="Search">
+    <div class="input-group my-4">
 
-  <div class="row">
-    <div class="col-md-6" *ngFor="let account of accounts">
-      <div class="card mb-3">
-        <div class="card-body">
-          <a class="font-weight-bold font-monospace" (click)="accountSelected = account">{{ account.site }}</a>
-          <div class="d-flex small text-muted">
-            <span class="me-auto mt-auto">{{ account.username }}</span>
-            <a class="category px-3 border rounded-pill pt-1">
-              <i class="bi-folder me-1"></i>
-              <span>{{ account.category.name }}</span>
+      <!-- Search -->
+      <input type="text" class="mx-auto form-control p-3" placeholder="Search" [(ngModel)]="search">
+
+      <!-- Add account -->
+      <button class="btn btn-primary input-group-text" (click)="$event.stopPropagation(); add()">
+        <i class="bi-plus plus-icon"></i>
+      </button>
+    </div>
+
+    <!-- Data -->
+    <div class="row">
+      <div class="col-md-6" *ngFor="let account of accounts | filter: search: 'site'">
+        <div class="card mb-3">
+          <div class="card-body">
+            <a class="font-weight-bold font-monospace" (click)="$event.stopPropagation(); select(account)">
+              {{ account.site }}
             </a>
+            <div class="d-flex small text-muted">
+              <span class="me-auto mt-auto">{{ account.username }}</span>
+              <a class="category px-3 border rounded-pill pt-1" [class.active]="category"
+                 (click)="$event.stopPropagation(); filterByCategory(account.category.id)">
+                <i class="bi-folder me-1"></i>
+                <span>{{ account.category.name }}</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -20,23 +35,112 @@
   </div>
 </div>
 
-<app-dialog [template]="template" [show]="accountSelected !== null">
+<app-dialog [template]="template" [show]="isDialog">
   <ng-template #template>
-    <div class="container text-center py-4" *ngIf="accountSelected">
-      <h1 class="font-monospace">{{ accountSelected.site }}</h1>
-      <div class="d-flex my-4">
-        <div class="w-100">
-          <p class="font-weight-bold">Username</p>
-          <span class="py-1 px-4 border border-muted rounded-pill">{{ accountSelected.username }}</span>
-        </div>
-        <div class="w-100">
-          <p class="font-weight-bold">Category</p>
-          <span class="py-1 px-4 border border-muted rounded-pill">{{ accountSelected.category.name }}</span>
-        </div>
+    <div class="container py-4">
+
+      <!-- Header -->
+      <div class="d-flex">
+        <!-- Back -->
+        <ng-container *ngIf="!form.viewMode && form.id">
+          <a class="fw-bold text-primary link"
+             (click)="form.viewMode = !form.viewMode">
+            <i class="bi-arrow-left text-secondary"></i>
+            <span class="ms-2">View {{ form.data.site }}</span>
+          </a>
+
+          <!-- Delete -->
+          <a class="text-secondary ms-auto">
+            <i class="bi-trash"></i>
+          </a>
+        </ng-container>
+
+        <!-- Edit -->
+        <a class="text-primary link ms-auto" *ngIf="form.viewMode" (click)="form.viewMode = !form.viewMode">
+          <i class="bi-pen"></i>
+        </a>
       </div>
-      <button class="w-100 font-monospace btn btn-lg btn-dark rounded-pill">
-        {{ accountSelected.password }}
-      </button>
+
+      <!-- View -->
+      <div class="text-center" *ngIf="form.viewMode">
+
+        <!-- Site -->
+        <h1 class="font-monospace text-secondary">{{ form.data.site }}</h1>
+
+        <div class="d-flex my-4">
+          <!-- Username -->
+          <div class="w-100">
+            <i class="bi-person"></i>
+            <span class="ms-2">{{ form.data.username }}</span>
+          </div>
+          <!-- Category -->
+          <div class="w-100">
+            <i class="bi-folder"></i>
+            <span class="ms-2">{{ form.data.category.name }}</span>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <button class="w-100 font-monospace btn btn-lg btn-secondary rounded-pill password">
+          {{ form.data.password }}
+        </button>
+      </div>
+
+      <!-- Form -->
+      <div *ngIf="!form.viewMode" [formGroup]="form.form">
+        <div class="row">
+
+          <!-- Site -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input id="site" type="text" class="form-control my-2" placeholder="site" formControlName="site">
+              <label for="site">Site</label>
+              <div class="text-danger" *ngIf="form.error.site">{{ form.error.site[0] }}</div>
+            </div>
+          </div>
+
+          <!-- Username -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input id="username" type="text" class="form-control my-2" placeholder="username"
+                     formControlName="username">
+              <label for="username">Username</label>
+              <div class="text-danger" *ngIf="form.error.username">{{ form.error.username[0] }}</div>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input id="password" type="text" class="form-control my-2" placeholder="password"
+                     formControlName="password">
+              <label for="password">Password</label>
+              <div class="text-danger" *ngIf="form.error.password">{{ form.error.password[0] }}</div>
+            </div>
+          </div>
+
+          <!-- Category -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <select id="category" class="form-select my-2" formControlName="category">
+                <option [ngValue]="null">Choose category</option>
+                <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+              </select>
+              <label for="category">Category</label>
+              <div class="text-danger" *ngIf="form.error.category">{{ form.error.category[0] }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Errors -->
+        <div class="text-danger" *ngIf="form.error.non_field_errors">{{ form.error.non_field_errors[0] }}</div>
+
+        <!-- Submit -->
+        <button class="btn btn-primary w-100" type="submit" (click)="submit()">
+          <span *ngIf="form.id">Update</span>
+          <span *ngIf="!form.id">Create</span>
+        </button>
+      </div>
     </div>
   </ng-template>
 </app-dialog>

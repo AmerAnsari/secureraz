@@ -1,5 +1,5 @@
 /**
- * Parsed authentication token (JTW)
+ * Parsed authentication token (JTW).
  */
 export interface AuthToken {
   email: string;

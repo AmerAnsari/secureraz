@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Link } from './shared/interfaces/link';
+import { Link } from '@app/components/main/shared/interfaces/link';
 
 @Component({
   selector: 'app-main',
@@ -9,7 +9,8 @@ import { Link } from './shared/interfaces/link';
 export class MainComponent {
 
   readonly links: Link[] = [
+    { label: 'Categories', path: './category', icon: 'bi-folder' },
     { label: 'Accounts', path: './accounts', icon: 'bi-shield-lock' },
-    { label: 'Files', path: './files', icon: 'bi-files-alt' },
+    { label: 'Media', path: './media', icon: 'bi-files-alt' },
   ];
 }

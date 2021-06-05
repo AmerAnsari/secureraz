@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ApiService } from 'src/app/core/api/api.service';
-import { UserService } from 'src/app/core/user/user.service';
-import { AuthResponse } from 'src/app/shared/interfaces/auth-response';
-import { AuthToken } from 'src/app/shared/interfaces/auth-token';
-import { environment } from 'src/environments/environment';
+import { ApiService } from '@core/api/api.service';
+import { UserService } from '@core/user/user.service';
+import { AuthResponse } from '@interfaces/auth-response';
+import { AuthToken } from '@interfaces/auth-token';
+import { environment } from '@environments/environment';
 
 @Injectable({
   providedIn: 'root',

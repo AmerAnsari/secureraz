@@ -11,8 +11,11 @@ const routes: Routes = [{
       path: 'accounts',
       loadChildren: () => import('./accounts/accounts.module').then(m => m.AccountsModule),
     }, {
-      path: 'files',
-      loadChildren: () => import('./files/files.module').then(m => m.FilesModule),
+      path: 'media',
+      loadChildren: () => import('./media/media.module').then(m => m.MediaModule),
+    }, {
+      path: 'category',
+      loadChildren: () => import('./category/category.module').then(m => m.CategoryModule),
     },
   ],
 }];

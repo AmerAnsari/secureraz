@@ -8,14 +8,9 @@ $height: 300px;
   box-shadow: $box-shadow-lg;
   position: fixed;
   left: 0;
+  z-index: 100;
   width: 100%;
   bottom: 0;
   max-height: $height;
   overflow-y: auto;
-  transition: $transition-base;
-
-  &.close {
-    bottom: -$height;
-    pointer-events: none;
-  }
 }

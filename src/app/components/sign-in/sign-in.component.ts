@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/auth/auth.service';
-import { AuthResponse } from 'src/app/shared/interfaces/auth-response';
-import { ReactiveFormData } from 'src/app/shared/interfaces/reactive-form-data';
-import { HttpErrorResponseApi } from 'src/app/models/http-error-response-api';
+import { AuthService } from '@core/auth/auth.service';
+import { HttpErrorResponseApi } from '@models/http-error-response-api';
+import { AuthResponse } from '@interfaces/auth-response';
+import { ReactiveFormData } from '@interfaces/reactive-form-data';
 
 @Component({
   selector: 'app-sign-in',
@@ -29,7 +28,6 @@ export class SignInComponent {
     this.form.loading = true;
     this.form.error = {};
     this.authService.signIn(this.form.form.value).subscribe((data: AuthResponse): void => {
-      console.log(data);
       this.form.loading = false;
     }, (error: HttpErrorResponseApi): void => {
       this.form.loading = false;

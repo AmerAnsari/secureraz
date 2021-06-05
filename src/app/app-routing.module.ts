@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AnonymousGuardService } from './core/anonymous-guard/anonymous-guard.service';
-import { AuthGuardService } from './core/auth-guard/auth-guard.service';
+import { AnonymousGuardService } from '@core/anonymous-guard/anonymous-guard.service';
+import { AuthGuardService } from '@core/auth-guard/auth-guard.service';
 
 const routes: Routes = [{
   path: 'sign-in',

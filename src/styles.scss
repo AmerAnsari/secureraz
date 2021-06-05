@@ -23,7 +23,7 @@
 @import "~bootstrap/scss/forms/form-select";
 @import "~bootstrap/scss/forms/form-check";
 //@import "~bootstrap/scss/forms/form-range";
-//@import "~bootstrap/scss/forms/floating-labels";
+@import "~bootstrap/scss/forms/floating-labels";
 @import "~bootstrap/scss/forms/input-group";
 @import "~bootstrap/scss/forms/validation";
 @import "~bootstrap/scss/buttons";
@@ -43,7 +43,7 @@
 //@import "~bootstrap/scss/close";
 //@import "~bootstrap/scss/toasts";
 @import "~bootstrap/scss/modal";
-//@import "~bootstrap/scss/tooltip";
+@import "~bootstrap/scss/tooltip";
 //@import "~bootstrap/scss/popover";
 //@import "~bootstrap/scss/carousel";
 @import "~bootstrap/scss/spinners";
@@ -64,3 +64,70 @@
 /* Bootstrap Icons */
 
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+
+::-moz-selection {
+  background-color: lighten($primary, 10);
+  color: $white;
+}
+
+::selection {
+  background-color: lighten($primary, 10);
+  color: $white;
+}
+
+::-webkit-scrollbar {
+  width: $scrollbar-size;
+  height: $scrollbar-size;
+  background: transparent;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $tertiary;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.btn-primary, .btn-secondary {
+  color: white !important;
+}
+
+.link {
+  &:hover,
+  &:focus {
+    color: $link-hover-color !important;
+    cursor: pointer;
+  }
+}
+
+.label {
+  font-size: 12px;
+  font-weight: bold;
+  color: $secondary;
+  text-transform: uppercase;
+}
+
+a {
+  cursor: pointer;
+}
+
+.modal {
+  .full {
+    max-width: initial;
+    margin: 0;
+    height: 100%;
+
+    .modal-content {
+      border: none;
+      border-radius: 0;
+      background: rgba($dark, 0.75);
+    }
+  }
+}

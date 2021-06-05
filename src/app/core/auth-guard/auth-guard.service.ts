@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanLoad, Route, Router, UrlSegment } from '@angular/router';
-import { UserService } from 'src/app/core/user/user.service';
+import { UserService } from '@core/user/user.service';
 import { Observable } from 'rxjs';
 
 @Injectable({

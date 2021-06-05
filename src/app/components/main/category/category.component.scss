@@ -1,0 +1,13 @@
+@import "src/variables";
+
+input {
+  max-width: map_get($grid-breakpoints, md);
+}
+
+.plus-icon {
+  font-size: 20px;
+}
+
+.count {
+  margin-right: 20px;
+}

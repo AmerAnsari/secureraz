@@ -1,22 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from '@modules/dialog/dialog.module';
 import { FilterModule } from '@modules/filter/filter.module';
-import { AccountsRoutingModule } from './accounts-routing.module';
-import { AccountsComponent } from './accounts.component';
+import { CategoryRoutingModule } from './category-routing.module';
+import { CategoryComponent } from './category.component';
 
 
 @NgModule({
-  declarations: [AccountsComponent],
+  declarations: [CategoryComponent],
   imports: [
     CommonModule,
-    AccountsRoutingModule,
-    DialogModule,
+    CategoryRoutingModule,
     ReactiveFormsModule,
     FilterModule,
     FormsModule,
+    DialogModule,
   ],
 })
-export class AccountsModule {
+export class CategoryModule {
 }

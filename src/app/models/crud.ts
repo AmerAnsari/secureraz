@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { GetParams } from 'src/app/shared/types/get-params';
-import { Payload } from 'src/app/shared/types/payload';
-import { PK } from 'src/app/shared/types/pk';
+import { GetParams } from '@app/shared/types/get-params';
+import { Payload } from '@app/shared/types/payload';
+import { PK } from '@app/shared/types/pk';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Crud } from 'src/app/models/crud';
-import { environment } from 'src/environments/environment';
+import { Crud } from '@models/crud';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-root',

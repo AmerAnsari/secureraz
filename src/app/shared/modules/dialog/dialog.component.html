@@ -1,5 +1,5 @@
-<div class="wrapper" [class.close]="!show">
-  <div class="container" *ngIf="show">
+<div class="wrapper" @slideIn *ngIf="show">
+  <div class="container">
     <ng-template [ngTemplateOutlet]="template"></ng-template>
   </div>
 </div>
